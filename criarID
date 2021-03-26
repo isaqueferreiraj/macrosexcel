@@ -1,0 +1,28 @@
+Sub criarId()
+   Dim x As Integer
+   Dim idAtual As Integer
+   Dim rng As Range
+   Dim ultL As Integer
+   
+   ultL = Range("A2", Range("A2").End(xlDown)).Rows.Count
+   
+   
+   'Varre as linhas e adiciona o ID 
+   For i = 2 To (ultL + 1)
+        If IsEmpty(Cells(i, 4)) = True Then
+            Cells(i, 4).Value = idAtual + 1
+            idAtual = idAtual + 1
+        End If
+        For j = (i + 1) To (ultL + 1)
+            If IsEmpty(Cells(j, 4)) = True Then
+                If Cells(i, 2).Value = Cells(j, 2).Value Then
+                    Cells(j, 4).Value = Cells(i, 4).Value
+                End If
+                If Cells(i, 3).Value = Cells(j, 3).Value Then
+                    Cells(j, 4).Value = Cells(i, 4).Value
+                End If
+            End If
+        Next j
+   Next i
+   
+End Sub
